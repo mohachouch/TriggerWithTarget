@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TriggerWithTarget.Interactivity"
+             x:Class="TriggerWithTarget.MainPage"
+             x:Name="contentPage">
+
+    <local:Interactivity.Triggers>
+        <local:DataTrigger Binding="{Binding IsBusy}" Value="true">
+            <local:Setter PropertyName="BackgroundColor" Value="Red" TargetReference="{x:Reference contentPage}"/>
+            <local:Setter PropertyName="BackgroundColor" Value="Yellow" TargetReference="{x:Reference lblWelcome}" />
+            <local:Setter PropertyName="HeightRequest" Value="300" TargetReference="{x:Reference btnClickMe}" />
+            <local:Setter PropertyName="BackgroundColor"  Value="Blue" TargetReference="{x:Reference btnClickMe}" />
+            <local:Setter PropertyName="TextColor"  Value="Yellow" TargetReference="{x:Reference btnClickMe}" />
+            <local:Setter PropertyName="Text"  Value="Yes you clicked on this !!!!!!!!!!!!" TargetReference="{x:Reference btnClickMe}" />
+            <local:Setter PropertyName="HorizontalOptions" Value="Center" TargetReference="{x:Reference btnClickMe}" />
+            <local:Setter PropertyName="Height" Value="Auto" TargetReference="{x:Reference row1}" />
+        </local:DataTrigger>
+    </local:Interactivity.Triggers>
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="row1" Height="300" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label x:Name="lblWelcome" Text="{Binding IsBusy, Source={x:Reference contentPage}}"  VerticalOptions="CenterAndExpand" 
+               HorizontalOptions="CenterAndExpand" />
+
+        <Button Grid.Row="1" x:Name="btnClickMe" HeightRequest="100"  Text="Click me" Clicked="Button_Clicked" />
+    </Grid>
+</ContentPage>
